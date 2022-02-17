@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using Game.Code.Common;
+using Game.Code.Logic.Players;
 using Game.Code.UI.Elements;
 
 public enum EnemyState
@@ -20,12 +21,10 @@ namespace Game.Code.Logic.Enemies
         [SerializeField] protected DetectionProps _detectionProperties;
         [SerializeField] protected PursuitProps _pursuitProperties;
         
-        private const string Dead = "Dead";
-        private const string Idle = "Idle";
-        private static readonly int DeadHash = Animator.StringToHash(Dead);
-        private static readonly int IdleHash = Animator.StringToHash(Idle);
+        private static readonly int DeadHash = Animator.StringToHash("Dead");
+        private static readonly int IdleHash = Animator.StringToHash("Idle");
 
-        private EnemyPatrolBehaviour _patrolBehaviourBehaviour;
+        private EnemyPatrolBehaviour _patrolBehaviour;
         private EnemyFindTargetBehaviour _findTargetBehaviour;
         private EnemyPursuitBehaviour _pursuitBehaviour;
 
@@ -39,8 +38,8 @@ namespace Game.Code.Logic.Enemies
             _player = player;
             
             WaypointNetwork waypointNetwork = new WaypointNetwork(waypointList);
-            _patrolBehaviourBehaviour = new EnemyPatrolBehaviour(_components, _movementProperties, waypointNetwork);
-            _patrolBehaviourBehaviour.Init();
+            _patrolBehaviour = new EnemyPatrolBehaviour(_components, _movementProperties, waypointNetwork);
+            _patrolBehaviour.Init();
 
             _findTargetBehaviour = new EnemyFindTargetBehaviour(_components, _detectionProperties);
             _findTargetBehaviour.Init(transform, player.GetTransform());
@@ -62,7 +61,7 @@ namespace Game.Code.Logic.Enemies
                     case EnemyState.None:
                         break;
                     case EnemyState.Patrol:
-                        _patrolBehaviourBehaviour.Tick(Time.deltaTime);
+                        _patrolBehaviour.Tick(Time.deltaTime);
                         _findTargetBehaviour.Tick(Time.deltaTime);
                         break;
                     case EnemyState.Pursuit:

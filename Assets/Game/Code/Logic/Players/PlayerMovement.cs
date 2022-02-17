@@ -6,9 +6,8 @@ namespace Game.Code.Logic.Players
 {
     public class PlayerMovement : ITickable
     {
-        private const string MovementSpeed = "Speed";
         private const float Epsilon = 0.001f;
-        private readonly int Speed = Animator.StringToHash(MovementSpeed);
+        private readonly int Speed = Animator.StringToHash("Speed");
 
         private readonly IInputService _inputService;
 

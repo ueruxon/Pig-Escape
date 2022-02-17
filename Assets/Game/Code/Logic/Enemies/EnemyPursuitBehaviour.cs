@@ -6,8 +6,7 @@ namespace Game.Code.Logic.Enemies
 {
     public class EnemyPursuitBehaviour : ITickable
     {
-        private const string Speed = "Speed";
-        private static readonly int SpeedHash = Animator.StringToHash(Speed);
+        private static readonly int SpeedHash = Animator.StringToHash("Speed");
         
         public event Action<bool> PursuitEnded;
         

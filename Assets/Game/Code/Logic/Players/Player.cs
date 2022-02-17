@@ -46,6 +46,8 @@ namespace Game.Code.Logic.Players
 
         public void Disable() => 
             _disable = true;
+
+        public CombatProps GetProps() => _combatProps;
     }
 
     [Serializable]

@@ -5,8 +5,7 @@ namespace Game.Code.Logic.Enemies
 {
     public class EnemyPatrolBehaviour : ITickable
     {
-        private const string Speed = "Speed";
-        private static readonly int SpeedHash = Animator.StringToHash(Speed);
+        private static readonly int SpeedHash = Animator.StringToHash("Speed");
         
         private enum State {
             PatrollingMovement,
